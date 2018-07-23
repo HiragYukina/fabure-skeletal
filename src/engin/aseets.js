@@ -192,4 +192,4 @@ Asset._unloadSound = function (name) {
     }
 }
 
-export default Asset
+module.exports = Asset
