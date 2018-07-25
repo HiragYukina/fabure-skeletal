@@ -45,9 +45,3 @@ function onUp(e) {
     dragging = false // ドラッグ終了
 }
 
-function drawRect() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height) // キャンバスをクリア
-    images.forEach(image => {
-        image.draw(ctx)
-    }, false)
-}

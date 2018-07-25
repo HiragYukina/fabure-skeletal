@@ -10,7 +10,7 @@ let album = null
 let index = 0
 let regexp = /.*\.(jpg|jpeg|png|gif)$/i
 
-let fileRead = function () {
+let fileRead = () => {
     if (!album) {
         album = fs.readdirSync(path)
         album = album.filter(file => {
@@ -33,6 +33,7 @@ app.on("ready", () => {
         height: 600
     })
     win.loadFile("./index.html")
+    win.webContents.openDevTools()
     win.on("closed", () => {
         mainWindow = null
     })
