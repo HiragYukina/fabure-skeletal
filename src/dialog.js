@@ -7,7 +7,7 @@ module.exports = () => {
     }
 
     dialog.showOpenDialog(options, filenames => {
-        msg(filenames)
+         loadImage(filenames)
     })
 }
 

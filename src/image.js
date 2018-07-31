@@ -1,20 +1,25 @@
 
 module.exports = class {
 
-    constructor(src) {
-        this.image = new Image
-        this.image.src = src
-        this.x
-        this.y
-    }
+    /**
+     * 画像のデータ
+     * 
+     *      name:"名前",
+     *      x:"x座標",
+     *      y:"y座標"
+     * 
+     */
 
-    setPosition(){
-        this.x = (canvas.width / 2) - this.image.width / 2
-        this.y = (canvas.height / 2) - this.image.height / 2
+    constructor(name) {
+        this.name = name
+
+        this.x = (canvas.width / 2) - Aseet.images[this.name].width / 2
+        this.y = (canvas.height / 2) - Aseet.images[this.name].height / 2
+
     }
 
     draw(ctx) {
-        ctx.drawImage(this.image, this.x, this.y)
+        ctx.drawImage(Aseet.images[this.name], this.x, this.y)
         
     }
 

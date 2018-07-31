@@ -1,8 +1,8 @@
 
 let dragging = false
-let a = 0
+let choiceName
 
-function onDown(e) {
+let onDown = e => {
     // キャンバスの左上端の座標を取得
     const offsetX = canvas.getBoundingClientRect().left
     const offsetY = canvas.getBoundingClientRect().top
@@ -13,18 +13,16 @@ function onDown(e) {
       let c = 0
     // オブジェクト上の座標かどうかを判定
     images.forEach(image => {
-        if (image.x < x && (image.x + image.image.width) > x && image.y < y && (image.y + image.image.height) > y) {
+        if (image.x < x && (image.x + Aseet.images[image.name].width) > x && image.y < y && (image.y + Aseet.images[image.name].height) > y) {
             dragging = true; // ドラッグ開始
             relX = image.x - x
             relY = image.y - y
-            a = c
+            choiceName = image.name
         }
-        //クリックされたオブジェクト
-        c++
     })
 }
 
-function onMove(e) {
+let onMove = e => {
     // キャンバスの左上端の座標を取得
     var offsetX = canvas.getBoundingClientRect().left
     var offsetY = canvas.getBoundingClientRect().top
@@ -35,13 +33,17 @@ function onMove(e) {
 
     // ドラッグが開始されていればオブジェクトの座標を更新して再描画
     if (dragging) {
-        images[a].x = x + relX
-        images[a].y = y + relY
-        drawRect()
+        images.forEach(image =>{
+            if(image.name === choiceName){
+                  image.x = x + relX
+                  image.y = y + relY
+                  drawRect()
+            }
+        })
     }
 }
 
-function onUp(e) {
+let onUp = e => {
     dragging = false // ドラッグ終了
 }
 
