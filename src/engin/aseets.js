@@ -13,9 +13,9 @@
  */
 
 //アセットの管理ツール
-const Aseet = {
+const Asset = {
     //登録済みアセット
-    aseets: [],
+    assets: [],
     //画像リソース
     images: {},
     //効果音のリソース
@@ -26,14 +26,14 @@ const Aseet = {
 /***
  * データの登録
  * 
- * @param {Array} aseets アセット情報配列
+ * @param {Array} assets アセット情報配列
  */
-Aseet.register = (aseets) => {
-    if (aseets.constructor.name !== "Array") {
-        console.warn("Aseet.register:アセット情報としてArray以外のパラメータが渡された" + aseets)
+Asset.register = (assets) => {
+    if (assets.constructor.name !== "Array") {
+        console.warn("Asset.register:アセット情報としてArray以外のパラメータが渡された" + assets)
         return
     }
-    Aseet.aseets = [...Aseet.aseets, ...aseets]
+    Asset.assets = [...Asset.assets, ...assets]
 }
 
 
@@ -43,11 +43,11 @@ Aseet.register = (aseets) => {
  * @param {String} src JSONのファイルパス
  * @return {Promise}
  */
-Aseet.registerByJsonFile = (src) => {
+Asset.registerByJsonFile = (src) => {
     return fetch(src).then(response => {
         return response.json()
     }).then(json => {
-        Aseet.register(json)
+        Asset.register(json)
     })
 }
 
@@ -58,17 +58,17 @@ Aseet.registerByJsonFile = (src) => {
  * @param {String}　アセット名
  * @return {Promise}
  */
-Aseet.load = (name) => {
-    const aseet = Aseet.aseets.find(aseet => {
-        return aseet.name === name
+Asset.load = (name) => {
+    const asset = Asset.assets.find(asset => {
+        return asset.name === name
     })
-    switch (aseet.type) {
+    switch (asset.type) {
         case "image":
-            return Aseet.loadImage(aseet)
+            return Asset.loadImage(asset)
             break
 
         case "sound":
-            return Aseet.loadSound(aseet)
+            return Asset.loadSound(asset)
             break
     }
 }
@@ -77,13 +77,13 @@ Aseet.load = (name) => {
 /**
  * 画像の読み込み
  * 
- * @param {Object} aseet アセット情報
+ * @param {Object} asset アセット情報
  * @return {Promise}
  */
-Aseet.loadImage = (aseet) => {
+Asset.loadImage = (asset) => {
     const image = new Image()
-    image.src = aseet.src
-    Aseet.images[aseet.name] = image
+    image.src = asset.src
+    Asset.images[asset.name] = image
 
     return new Promise((resolve) => {
         image.onload = () => {
@@ -96,15 +96,15 @@ Aseet.loadImage = (aseet) => {
 /**
  * 効果音の読み込み
  * 
- * @param {Object} aseet アセット情報
+ * @param {Object} asset アセット情報
  * @return {Promise}
  */
-Aseet.loadSound = (aseet) => {
-    return fetch(aseet.src).then(response => {
+Asset.loadSound = (asset) => {
+    return fetch(asset.src).then(response => {
         return response.arrayBuffer()
     }).then(sound => {
         Audio.ctx.decodeAudioData(sound, buffer => {
-            Aseet.sounds[aseet.name] = buffer
+            Asset.sounds[asset.name] = buffer
         })
     })
 }
@@ -116,13 +116,13 @@ Aseet.loadSound = (aseet) => {
  * @param {String} tag 読み込むタグ
  * @return {Promise}
  */
-Aseet.loadByTag = (tag) => {
-    const aseets = Aseet.aseets.filter(aseet => {
-        return aseet.tag.includes(tag)
+Asset.loadByTag = (tag) => {
+    const assets = Asset.assets.filter(asset => {
+        return asset.tag.includes(tag)
     })
 
-    return Promise.all(aseets.map((aseet) => {
-        return Aseet.load(aseet.name)
+    return Promise.all(assets.map((asset) => {
+        return Asset.load(asset.name)
     }))
 }
 
@@ -133,9 +133,9 @@ Aseet.loadByTag = (tag) => {
  * @param {String} tags 読み込むタグの配列
  * @return {Promise}
  */
-Aseet.loadByTags = (tags) => {
+Asset.loadByTags = (tags) => {
     return Promise.all(tags.map((tag) => {
-        return Aseet.loadByTag(tag)
+        return Asset.loadByTag(tag)
     }))
 }
 
@@ -145,9 +145,9 @@ Aseet.loadByTags = (tags) => {
  * 
  * @return {Promise}
  */
-Aseet.loadAll = () => {
-    return Promise.all(Aseet.aseets.map((aseet) => {
-        return Aseet.load(aseet.name)
+Asset.loadAll = () => {
+    return Promise.all(Asset.assets.map((asset) => {
+        return Asset.load(asset.name)
     }))
 }
 
@@ -155,18 +155,18 @@ Aseet.loadAll = () => {
 /**
  * 読み込んだアセットの破棄
  */
-Aseet.unload = (name) => {
-    const aseet = Aseet.aseets.find(function (aseet) {
-        return aseet.name === name
+Asset.unload = (name) => {
+    const asset = Asset.assets.find(function (asset) {
+        return asset.name === name
     })
 
-    switch (aseet.type) {
+    switch (asset.type) {
         case "image":
-            Aseet._unloadImage(aseet.name)
+            Asset._unloadImage(asset.name)
             break
 
         case "sound":
-            Aseet._unloadSound(aseet.name)
+            Asset._unloadSound(asset.name)
             break
     }
 }
@@ -177,19 +177,19 @@ Aseet.unload = (name) => {
  *
  * @param {String} name アセット名
  */
-Aseet._unloadImage = function (name) {
-    if (Aseet.images.hasOwnProperty(name)) {
-        delete Aseet.images[name]
+Asset._unloadImage = function (name) {
+    if (Asset.images.hasOwnProperty(name)) {
+        delete Asset.images[name]
     }
 }
 
 /**
  * 音声アセットの破棄
  */
-Aseet._unloadSound = function (name) {
-    if (Aseet.sounds.hasOwnProperty(name)) {
-        delete Aseet.sounds[name]
+Asset._unloadSound = function (name) {
+    if (Asset.sounds.hasOwnProperty(name)) {
+        delete Asset.sounds[name]
     }
 }
 
-module.exports = Aseet
+module.exports = Asset

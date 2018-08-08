@@ -1,3 +1,4 @@
+//読み込む
 const {dialog} = require("electron").remote
 
 module.exports = () => {
@@ -5,9 +6,7 @@ module.exports = () => {
         title: "open File",
         properties: ["openFile"]
     }
-
     dialog.showOpenDialog(options, filenames => {
-         loadImage(filenames)
+        loadImage(filenames)
     })
 }
-
