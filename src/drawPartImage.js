@@ -1,4 +1,5 @@
 
+const Asset = require("./engin/assets")
 
 module.exports = (name) => {
     const x = canvas.width / 2 - Asset.images[name].width / 2

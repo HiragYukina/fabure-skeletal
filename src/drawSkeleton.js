@@ -1,5 +1,5 @@
-  
-  
+  const Asset = require("./engin/assets")
+
   let drawNode = (x, y, angle, image) => {
       const radian = Math.PI / 180
       ctx.save()
