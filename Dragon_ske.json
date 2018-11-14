@@ -52,7 +52,7 @@
         {
           "length": 150,
           "name": "legL",
-          "parent": "body",
+          "parent": "body", 
           "transform": {
             "x": -71.0496,
             "y": -60.2758,
@@ -834,7 +834,7 @@
             {
               "name": "armUpperR",
               "translateFrame": [
-                { "duration": 2, "tweenEasing": 0, "y": 10 },
+                { "duration": 2, "Easingtween": 0, "y": 10 },
                 { "duration": 3, "tweenEasing": 0, "x": -2.87, "y": 9.75 },
                 { "duration": 0, "y": 10 }
               ],
@@ -991,7 +991,7 @@
                 { "duration": 0, "y": 10 }
               ],
               "rotateFrame": [
-                { "duration": 2, "tweenEasing": 0, "rotate": -69.64 },
+                { "duration": 2, "cEasing": 0, "rotate": -69.64 },
                 { "duration": 3, "tweenEasing": 0, "rotate": -66.68 },
                 { "duration": 0, "rotate": -69.64 }
               ]

@@ -1,21 +1,10 @@
 {
-    "name": "face",
-    "src": "images/face.png",
-    "position": {
-        "x": 190,
-        "y": 100
-    },
-    "rotate": 0,
-    "scale": {
-        "side": 1,
-        "vertical": 1
-    },
-    "children": [{
-        "name": "body",
-        "src": "images/body.png",
+    "skeleton": {
+        "name": "face",
+        "src": "images/face.png",
         "position": {
-            "x": 200,
-            "y": 164
+            "x": 190,
+            "y": 100
         },
         "rotate": 0,
         "scale": {
@@ -23,62 +12,117 @@
             "vertical": 1
         },
         "children": [{
-                "name": "rightArm",
-                "src": "images/arm.png",
-                "position": {
-                    "x": 168,
-                    "y": 174 
-                },
-                "rotate": 45,
-                "scale": {
-                    "side": 1,
-                    "vertical": 1
-                },
-                "children": []
+            "name": "body",
+            "src": "images/body.png",
+            "position": {
+                "x": 200,
+                "y": 164
             },
-            {
-                "name": "rightLeg",
-                "src": "images/arm.png",
-                "position": {
-                    "x": 200,
-                    "y": 240
-                },
-                "rotate": 0,
-                "scale": {
-                    "side": 1,
-                    "vertical": 1
-                },
-                "children": []
+            "rotate": 0,
+            "scale": {
+                "side": 1,
+                "vertical": 1
             },
-            {
-                "name": "leftArm",
-                "src": "images/arm.png",
-                "position": {
-                    "x": 246,
-                    "y": 174
+            "children": [{
+                    "name": "rightArm",
+                    "src": "images/arm.png",
+                    "position": {
+                        "x": 168,
+                        "y": 174
+                    },
+                    "rotate": 45,
+                    "scale": {
+                        "side": 1,
+                        "vertical": 1
+                    },
+                    "children": []
                 },
-                "rotate": -45,
-                "scale": {
-                    "side": 1,
-                    "vertical": 1
+                {
+                    "name": "rightLeg",
+                    "src": "images/arm.png",
+                    "position": {
+                        "x": 200,
+                        "y": 240
+                    },
+                    "rotate": 0,
+                    "scale": {
+                        "side": 1,
+                        "vertical": 1
+                    },
+                    "children": []
                 },
-                "children": []
-            },
-            {
-                "name": "leftLeg",
-                "src": "images/arm.png",
-                "position": {
-                    "x": 220,
-                    "y": 244
+                {
+                    "name": "leftArm",
+                    "src": "images/arm.png",
+                    "position": {
+                        "x": 246,
+                        "y": 174
+                    },
+                    "rotate": -45,
+                    "scale": {
+                        "side": 1,
+                        "vertical": 1
+                    },
+                    "children": []
                 },
-                "rotate": 0,
-                "scale": {
-                    "side": 1,
-                    "vertical": 1
-                },
-                "children": []
-            }
-        ]
-    }]
+                {
+                    "name": "leftLeg",
+                    "src": "images/arm.png",
+                    "position": {
+                        "x": 220,
+                        "y": 244
+                    },
+                    "rotate": 0,
+                    "scale": {
+                        "side": 1,
+                        "vertical": 1
+                    },
+                    "children": []
+                }
+            ]
+        }]
 
+    },
+    "animation": [{
+            "frameRate": 24,
+            "duration": 100,
+            "playTimes": 0,
+            "name": "stand",
+            "bone": [{
+                    "name": "face",
+                    "translateFrame": [{
+                            "duration": 0,
+                            "x": -190
+                        },
+                        {
+                            "duration": 100,
+                            "x": 400
+                        }
+                    ]
+                },
+                {
+                    "name": "body",
+                    "translateFrame": [{
+                            "duration": 0,
+                            "x": -200
+                        },
+                        {
+                            "duration": 100,
+                            "x": 400
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "frameRate": 24,
+            "duration": 100,
+            "playTimes": 0,
+            "name": "walk",
+            "bone": [{
+                "name": "body"
+            }]
+
+        }
+    ]
 }

@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Sample</title>
     <script src="src/main.js"></script>
     <script src="src/mouse.js"></script>
-</head>
-<body>
-    <canvas id="mainCanvas"width="500" height="300"></canvas>
-    <button onclick="openPart()">パーツの読み込み</button>
-    <button onclick="openJson()">JSON読み込み</button>
-</body>
+  </head>
+
+  <body>
+    <canvas id="mainCanvas" width="500" height="300"></canvas>
+    <div>
+      <button onclick="openPart()">パーツの読み込み</button>
+      <button onclick="openJson()">JSON読み込み</button>
+    </div>
+    <div>
+      <button id="start">start</button> <button id="end">end</button>
+      <div>
+        <input type="checkbox" name="loop" id="loop" />ループ
+        <div id="animation"></div>
+      </div>
+    </div>
+  </body>
 </html>
